@@ -2,7 +2,10 @@
 
 Official Nim implementation of the BPX Message Queue.
 
-BPX MQ is a real-time off-chain communication layer for DApps running on the BPX blockchain.
+BPX MQ is a decentralized, peer-to-peer network of message relaying nodes. The purpose of BPX MQ is providing
+real time, off-chain communication for DApps running on the BPX blockchain. In simple terms, BPX MQ can be
+compared to a global, distributed in trustless manner RabbitMQ or Apache Kafka cluster, where each BPX wallet
+is a user account and can send messages to other wallets, or participate in pub-sub groups.
 
 ## Building the source
 
