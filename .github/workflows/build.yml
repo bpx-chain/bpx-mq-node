@@ -76,9 +76,9 @@ jobs:
         if-no-files-found: error
     
     - name: Upload release artifacts
-     if: env.RELEASE == 'true'
-     env:
-       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       BPX_INSTALLER_VERSION: ${{ steps.version_number.outputs.BPX_INSTALLER_VERSION }}
-     run: |
-       gh release upload $env:RELEASE_TAG ${{steps.vars.outputs.bpxmq}}
+      if: env.RELEASE == 'true'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BPX_INSTALLER_VERSION: ${{ steps.version_number.outputs.BPX_INSTALLER_VERSION }}
+      run: |
+        gh release upload $env:RELEASE_TAG ${{steps.vars.outputs.bpxmq}}
