@@ -26,7 +26,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         arch: [amd64]
         include:
         - os: macos-latest
@@ -42,6 +42,7 @@ jobs:
   
     - name: Get submodules hash
       id: submodules
+      shell: bash
       run: |
         echo "hash=$(git submodule status | awk '{print $1}' | sort | shasum -a 256 | sed 's/[ -]*//g')" >> $GITHUB_OUTPUT
   
@@ -55,12 +56,14 @@ jobs:
   
     - name: prep variables
       id: vars
+      shell: bash
       run: |
         BPXMQ_ARTIFACT_NAME=$(echo "bpxmq-${{matrix.arch}}-${{runner.os}}.tar.gz" | tr "[:upper:]" "[:lower:]")
   
         echo "bpxmq=${BPXMQ_ARTIFACT_NAME}" >> $GITHUB_OUTPUT
   
     - name: Install dependencies
+      shell: bash
       run: |
         OS=$([[ "${{runner.os}}" == "macOS" ]] && echo "macosx" || echo "linux")
   
