@@ -3,9 +3,9 @@ mode = ScriptMode.Verbose
 ### Package
 version       = "0.1.0"
 author        = "Status Research & Development GmbH"
-description   = "BPX MQ, Private P2P Messaging for Resource-Restricted Devices"
+description   = "Synapse, Private P2P Messaging for Resource-Restricted Devices"
 license       = "MIT or Apache License 2.0"
-#bin           = @["build/bpxmq"]
+#bin           = @["build/synapse"]
 
 ### Dependencies
 requires "nim >= 1.6.0",
@@ -46,25 +46,14 @@ proc buildLibrary(name: string, srcDir = "./", params = "", `type` = "static") =
   else:
     exec "nim c" & " --out:build/" & name & ".so --threads:on --app:lib --opt:size --noMain --header " & extra_params & " " & srcDir & name & ".nim"
 
-proc test(name: string, params = "-d:chronicles_log_level=DEBUG", lang = "c") =
-  # XXX: When running `> NIM_PARAMS="-d:chronicles_log_level=INFO" make test2`
-  # I expect compiler flag to be overridden, however it stays with whatever is
-  # specified here.
-  buildBinary name, "tests/", params
-  exec "build/" & name
-
-### Waku common tasks
-task testcommon, "Build & run common tests":
-  test "all_tests_common", "-d:chronicles_log_level=WARN -d:chronosStrictException"
-
 ### Waku tasks
-task bpxmqnode, "Build BPX MQ cli node":
-  let name = "bpxmqnode"
-  buildBinary name, "apps/bpxmqnode/"
+task synapse, "Build Synapse cli node":
+  let name = "synapse"
+  buildBinary name, "apps/synapse/"
 
-task bpxmqcanary, "Build bpxmq-canary tool":
-  let name = "bpxmqcanary"
-  buildBinary name, "apps/bpxmqcanary/"
+task synapsecanary, "Build synapse-canary tool":
+  let name = "synapsecanary"
+  buildBinary name, "apps/synapsecanary/"
 
 task networkmonitor, "Build network monitor tool":
   let name = "networkmonitor"

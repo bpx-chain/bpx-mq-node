@@ -32,17 +32,17 @@ else # "variables.mk" was included. Business as usual until the end of this file
 ##########
 ## Main ##
 ##########
-.PHONY: all test update clean
+.PHONY: all update clean
 
 # default target, because it's the first one that doesn't start with '.'
-all: | bpxmqnode libwaku
+all: | synapse libwaku
 
-bpxmq.nims:
-	ln -s bpxmq.nimble $@
+synapse.nims:
+	ln -s synapse.nimble $@
 
 update: | update-common
-	rm -rf bpxmq.nims && \
-		$(MAKE) bpxmq.nims $(HANDLE_OUTPUT)
+	rm -rf synapse.nims && \
+		$(MAKE) synapse.nims $(HANDLE_OUTPUT)
 
 clean:
 	rm -rf build
@@ -96,7 +96,7 @@ ifeq (, $(shell which anvil))
 	./scripts/install_anvil.sh
 endif
 
-deps: | deps-common nat-libs bpxmq.nims
+deps: | deps-common nat-libs synapse.nims
 
 
 ### nim-libbacktrace
@@ -164,44 +164,34 @@ clean-librln:
 clean: | clean-librln
 
 
-#################
-## Waku Common ##
-#################
-.PHONY: testcommon
-
-testcommon: | build deps
-	echo -e $(BUILD_MSG) "build/$@" && \
-		$(ENV_SCRIPT) nim testcommon $(NIM_PARAMS) bpxmq.nims
-
-
 ##########
 ## Waku ##
 ##########
-.PHONY: bpxmqnode
+.PHONY: synapse
 
-bpxmqnode: | build deps librln
+synapse: | build deps librln
 	echo -e $(BUILD_MSG) "build/$@" && \
-		$(ENV_SCRIPT) nim bpxmqnode $(NIM_PARAMS) bpxmq.nims
+		$(ENV_SCRIPT) nim synapse $(NIM_PARAMS) synapse.nims
 
 rln-db-inspector: | build deps librln
 	echo -e $(BUILD_MSG) "build/$@" && \
-	$(ENV_SCRIPT) nim rln_db_inspector $(NIM_PARAMS) bpxmq.nims
+	$(ENV_SCRIPT) nim rln_db_inspector $(NIM_PARAMS) synapse.nims
 
 
 ################
 ## Waku tools ##
 ################
-.PHONY: tools bpxmqcanary networkmonitor
+.PHONY: tools synapsecanary networkmonitor
 
-tools: networkmonitor bpxmqcanary
+tools: networkmonitor synapsecanary
 
-bpxmqcanary: | build deps librln
+synapsecanary: | build deps librln
 	echo -e $(BUILD_MSG) "build/$@" && \
-		$(ENV_SCRIPT) nim bpxmqcanary $(NIM_PARAMS) bpxmq.nims
+		$(ENV_SCRIPT) nim synapsecanary $(NIM_PARAMS) synapse.nims
 
 networkmonitor: | build deps librln
 	echo -e $(BUILD_MSG) "build/$@" && \
-		$(ENV_SCRIPT) nim networkmonitor $(NIM_PARAMS) bpxmq.nims
+		$(ENV_SCRIPT) nim networkmonitor $(NIM_PARAMS) synapse.nims
 
 
 
@@ -216,10 +206,10 @@ libwaku: | build deps librln
 		rm -f build/libwaku*
 ifeq ($(STATIC), true)
 		echo -e $(BUILD_MSG) "build/$@.a" && \
-		$(ENV_SCRIPT) nim libwakuStatic $(NIM_PARAMS) bpxmq.nims
+		$(ENV_SCRIPT) nim libwakuStatic $(NIM_PARAMS) synapse.nims
 else
 		echo -e $(BUILD_MSG) "build/$@.so" && \
-		$(ENV_SCRIPT) nim libwakuDynamic $(NIM_PARAMS) bpxmq.nims
+		$(ENV_SCRIPT) nim libwakuDynamic $(NIM_PARAMS) synapse.nims
 endif
 
 endif # "variables.mk" was not included

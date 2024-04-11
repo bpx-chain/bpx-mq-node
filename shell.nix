@@ -4,7 +4,7 @@
 }) {} }:
 
 pkgs.mkShell {
-  name = "nim-bpxmq-build-shell";
+  name = "nim-synapse-build-shell";
 
   # Versions dependent on nixpkgs commit. Update manually.
   buildInputs = with pkgs; [

@@ -55,7 +55,7 @@ import
   ../../waku/factory/external_config
 
 logScope:
-  topics = "bpxmqnode app"
+  topics = "synapse app"
 
 
 # Git version in git describe format (defined at compile time)
