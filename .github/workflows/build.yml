@@ -65,7 +65,13 @@ jobs:
     - name: Install dependencies
       shell: bash
       run: |
-        OS=$([[ "${{runner.os}}" == "macOS" ]] && echo "macosx" || echo "linux")
+        if [[ "${{runner.os}}" == "macOS" ]]; then
+          OS=macosx
+        elif [[ "${{runner.os}}" == "Linux" ]]; then
+          OS=linux
+        else
+          OS=windows
+        fi
   
         make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}}" V=1 update
         make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
