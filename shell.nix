@@ -4,7 +4,7 @@
 }) {} }:
 
 pkgs.mkShell {
-  name = "nim-waku-build-shell";
+  name = "nim-bpxmq-build-shell";
 
   # Versions dependent on nixpkgs commit. Update manually.
   buildInputs = with pkgs; [

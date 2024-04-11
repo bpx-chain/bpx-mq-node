@@ -3,9 +3,9 @@ mode = ScriptMode.Verbose
 ### Package
 version       = "0.1.0"
 author        = "Status Research & Development GmbH"
-description   = "Waku, Private P2P Messaging for Resource-Restricted Devices"
+description   = "BPX MQ, Private P2P Messaging for Resource-Restricted Devices"
 license       = "MIT or Apache License 2.0"
-#bin           = @["build/waku"]
+#bin           = @["build/bpxmq"]
 
 ### Dependencies
 requires "nim >= 1.6.0",
@@ -58,17 +58,13 @@ task testcommon, "Build & run common tests":
   test "all_tests_common", "-d:chronicles_log_level=WARN -d:chronosStrictException"
 
 ### Waku tasks
-task wakunode2, "Build Waku v2 cli node":
-  let name = "wakunode2"
-  buildBinary name, "apps/wakunode2/"
+task bpxmqnode, "Build BPX MQ cli node":
+  let name = "bpxmqnode"
+  buildBinary name, "apps/bpxmqnode/"
 
-task benchmarks, "Some benchmarks":
-  let name = "benchmarks"
-  buildBinary name, "apps/benchmarks/"
-
-task wakucanary, "Build waku-canary tool":
-  let name = "wakucanary"
-  buildBinary name, "apps/wakucanary/"
+task bpxmqcanary, "Build bpxmq-canary tool":
+  let name = "bpxmqcanary"
+  buildBinary name, "apps/bpxmqcanary/"
 
 task networkmonitor, "Build network monitor tool":
   let name = "networkmonitor"
@@ -77,30 +73,6 @@ task networkmonitor, "Build network monitor tool":
 task rln_db_inspector, "Build the rln db inspector":
   let name = "rln_db_inspector"
   buildBinary name, "tools/rln_db_inspector/"
-
-task test, "Build & run Waku tests":
-  test "all_tests_waku"
-
-task testwakunode2, "Build & run wakunode2 app tests":
-  test "all_tests_wakunode2"
-
-task example2, "Build Waku examples":
-  buildBinary "publisher", "examples/"
-  buildBinary "subscriber", "examples/"
-  buildBinary "filter_subscriber", "examples/"
-  buildBinary "lightpush_publisher", "examples/"
-
-task chat2, "Build example Waku chat usage":
-  # NOTE For debugging, set debug level. For chat usage we want minimal log
-  # output to STDOUT. Can be fixed by redirecting logs to file (e.g.)
-  #buildBinary name, "examples/", "-d:chronicles_log_level=WARN"
-
-  let name = "chat2"
-  buildBinary name, "apps/chat2/", "-d:chronicles_sinks=textlines[file] -d:ssl"
-
-task chat2bridge, "Build chat2bridge":
-  let name = "chat2bridge"
-  buildBinary name, "apps/chat2bridge/"
 
 ### C Bindings
 task libwakuStatic, "Build the cbindings waku node library":
