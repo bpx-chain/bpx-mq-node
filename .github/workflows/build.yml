@@ -70,8 +70,6 @@ jobs:
     - name: Install dependencies
       shell: bash
       run: |
-        which cc
-        
         if [[ "${{runner.os}}" == "macOS" ]]; then
           OS=macosx
         elif [[ "${{runner.os}}" == "Linux" ]]; then
@@ -80,7 +78,7 @@ jobs:
           OS=Windows_NT
         fi
   
-        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}}" V=1 update
+        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}}" V=1 CC=gcc update
         make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
         tar -cvzf ${{steps.vars.outputs.synapse}} ./build/
   
