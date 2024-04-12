@@ -70,11 +70,6 @@ jobs:
     - name: Install dependencies
       shell: bash
       run: |
-        gcc -print-prog-name=cc1
-        ls /c/mingw64/libexec/gcc/x86_64-w64-mingw32/12.2.0/
-        which cc1
-        
-        
         if [[ "${{runner.os}}" == "macOS" ]]; then
           OS=macosx
         elif [[ "${{runner.os}}" == "Linux" ]]; then
