@@ -70,7 +70,7 @@ jobs:
     - name: Install dependencies
       shell: bash
       run: |
-        which cc1
+        gcc -print-prog-name=cc1
         
         if [[ "${{runner.os}}" == "macOS" ]]; then
           OS=macosx
