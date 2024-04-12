@@ -59,17 +59,6 @@ jobs:
       shell: bash
       run: |
         SYNAPSE_ARTIFACT_NAME=$(echo "synapse-${{matrix.arch}}-${{runner.os}}.tar.gz" | tr "[:upper:]" "[:lower:]")
-  
-        echo "synapse=${SYNAPSE_ARTIFACT_NAME}" >> $GITHUB_OUTPUT
-
-    - name: Add Msys64 to PATH
-      if: matrix.os == 'windows-latest'
-      run: echo "/c/mingw64/libexec/gcc/x86_64-w64-mingw32/12.2.0/" >> $GITHUB_PATH
-      shell: bash
-        
-    - name: Install dependencies
-      shell: bash
-      run: |
         if [[ "${{runner.os}}" == "macOS" ]]; then
           OS=macosx
         elif [[ "${{runner.os}}" == "Linux" ]]; then
@@ -78,8 +67,13 @@ jobs:
           OS=Windows_NT
         fi
   
-        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}}" V=1 CC=gcc update
-        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
+        echo "synapse=${SYNAPSE_ARTIFACT_NAME}" >> $GITHUB_OUTPUT
+        echo "os=${OS}" >> $GITHUB_OUTPUT
+
+    - name: Install dependencies
+      run: |
+        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${steps.vars.outputs.os} --cpu:${{matrix.arch}}" V=1 update
+        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${steps.vars.outputs.os} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
         tar -cvzf ${{steps.vars.outputs.synapse}} ./build/
   
     - name: Upload asset
