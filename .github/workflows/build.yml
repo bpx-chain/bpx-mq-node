@@ -71,6 +71,8 @@ jobs:
       shell: bash
       run: |
         gcc -print-prog-name=cc1
+        which cc1
+        
         
         if [[ "${{runner.os}}" == "macOS" ]]; then
           OS=macosx
@@ -80,7 +82,7 @@ jobs:
           OS=Windows_NT
         fi
   
-        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}}" CFLAGS="-D__USE_MINGW_ACCESS" V=1 update
+        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}}" V=1 update
         make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${OS} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
         tar -cvzf ${{steps.vars.outputs.synapse}} ./build/
   
