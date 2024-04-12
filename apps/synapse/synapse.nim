@@ -91,7 +91,7 @@ when isMainModule:
     doInspectRlnDb(conf)
   of noCommand:
     # The Waku Network config (cluster-id=1)
-    if conf.clusterId == 1:
+    if conf.clusterId == 279:
       let twnClusterConf = ClusterConf.TheWakuNetworkConf()
       if len(conf.shards) != 0:
         conf.pubsubTopics = conf.shards.mapIt(twnClusterConf.pubsubTopics[it.uint16])

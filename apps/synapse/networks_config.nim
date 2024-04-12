@@ -22,7 +22,7 @@ type ClusterConf* = object
 proc TheWakuNetworkConf*(T: type ClusterConf): ClusterConf =
   return ClusterConf(
     maxMessageSize: "150KiB",
-    clusterId: 1.uint32,
+    clusterId: 279.uint32,
     rlnRelay: true,
     rlnRelayEthContractAddress: "0xF471d71E9b1455bBF4b85d475afb9BB0954A29c4",
     rlnRelayDynamic: true,

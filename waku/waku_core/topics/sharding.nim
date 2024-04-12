@@ -20,7 +20,7 @@ import
   ./pubsub_topic
 
 ## For indices allocation and other magic numbers refer to RFC 64
-const ClusterId* = 1
+const ClusterId* = 279
 const GenerationZeroShardsCount* = 8
 
 proc getGenZeroShard*(topic: NsContentTopic, count: int): NsPubsubTopic =

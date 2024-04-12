@@ -488,7 +488,7 @@ when isMainModule:
   var conf = confRes.get()
   info "cli flags", conf=conf
 
-  if conf.clusterId == 1:
+  if conf.clusterId == 279:
     let twnClusterConf = ClusterConf.TheWakuNetworkConf()
 
     conf.bootstrapNodes = twnClusterConf.discv5BootstrapNodes
