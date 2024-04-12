@@ -1,8 +1,8 @@
 # BPX Synapse node
 
-Official Nim implementation of the BPX Synapse node.
+Official Nim implementation of the Synapse network node.
 
-Synapse is a decentralized, peer-to-peer message queue providing real time, off-chain communication for BPX chain DApps.
+Synapse is a real time off-chain communication layer for BPX DApps.
 
 ## Building the source
 
