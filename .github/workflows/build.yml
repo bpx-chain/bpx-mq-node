@@ -72,8 +72,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${steps.vars.outputs.os} --cpu:${{matrix.arch}}" V=1 update
-        make -j${NPROC} NIMFLAGS="--parallelBuild:${NPROC} -d:disableMarchNative --os:${steps.vars.outputs.os} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
+        make -j${{NPROC}} NIMFLAGS="--parallelBuild:${{NPROC}} -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}}" V=1 update
+        make -j${{NPROC}} NIMFLAGS="--parallelBuild:${{NPROC}} -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
         tar -cvzf ${{steps.vars.outputs.synapse}} ./build/
   
     - name: Upload asset
