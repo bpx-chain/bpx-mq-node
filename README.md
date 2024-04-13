@@ -1,5 +1,7 @@
 # BPX Synapse node
 
+![Synapse](./logo.svg)
+
 Official Nim implementation of the Synapse network node.
 
 Synapse is a real time off-chain communication layer for BPX DApps.
