@@ -90,7 +90,7 @@ when isMainModule:
   of inspectRlnDb:
     doInspectRlnDb(conf)
   of noCommand:
-    # The Synapse Network config (cluster-id=1)
+    # The Synapse Network config (cluster-id=279)
     if conf.clusterId == 279:
       let twnClusterConf = ClusterConf.TheWakuNetworkConf()
       if len(conf.shards) != 0:

@@ -32,12 +32,11 @@ proc TheWakuNetworkConf*(T: type ClusterConf): ClusterConf =
     rlnRelayUserMessageLimit: 1,
     pubsubTopics:
       @[
-        "/waku/2/rs/1/0", "/waku/2/rs/1/1", "/waku/2/rs/1/2", "/waku/2/rs/1/3",
-        "/waku/2/rs/1/4", "/waku/2/rs/1/5", "/waku/2/rs/1/6", "/waku/2/rs/1/7"
+        "/waku/2/rs/279/0", "/waku/2/rs/279/1", "/waku/2/rs/279/2", "/waku/2/rs/279/3",
+        "/waku/2/rs/279/4", "/waku/2/rs/279/5", "/waku/2/rs/279/6", "/waku/2/rs/279/7"
       ],
     discv5Discovery: true,
     discv5BootstrapNodes:
       @[
-        "enr:-Kq4QNUvHvhZfXWWkSywxI0Hf53SspkxFuOXNWhEDUwNLQPgBNFdd7xY5XX8PRJAlRVJPUQrTT1HIBC9NFQAYlFALwMBgmlkgnY0gmlwhFBVndKKbXVsdGlhZGRyc4wACgRQVZ3SBh9A3gOJc2VjcDI1NmsxoQKPf_3kF7MBMxmyDoj9FXiR0pQGl3-IzeGeP8_U1oIjqoN0Y3CC6mCDdWRwgiMohXdha3UyDw"
       ],
   )
