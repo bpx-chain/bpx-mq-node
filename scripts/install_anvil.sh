@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Install Anvil
+echo "DEBUG1"
 
 
 BASE_DIR="${XDG_CONFIG_HOME:-$HOME}"
@@ -12,3 +13,4 @@ curl -L https://foundry.paradigm.xyz | bash
 echo "foundryup_path: $FOUNDRY_BIN_DIR"
 # run foundryup
 $FOUNDRY_BIN_DIR/foundryup
+echo "DEBUG2"

@@ -93,9 +93,7 @@ endif
 anvil: rustup
 ifeq (, $(shell which anvil))
 # Install Anvil if it's not installed
-    echo "DEBUG1"
 	./scripts/install_anvil.sh
-    echo "DEBUG2"
 endif
 
 deps: | deps-common nat-libs synapse.nims
