@@ -76,7 +76,7 @@ jobs:
     - name: Install musl
       if: runner.os == 'Linux'
       run: |
-        apt-get -y install musl-tools
+        sudo apt-get -y install musl-tools
     
     - name: Install dependencies
       run: |
