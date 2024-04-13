@@ -55,7 +55,7 @@ jobs:
       id: vars
       shell: bash
       run: |
-        if [ "$GITHUB_EVENT_NAME" == 'release' ] && [ "$GH_EVENT_ACTION" == 'published' ]; then
+        if [ "$GITHUB_EVENT_NAME" == 'release' ] && [ "${{ github.event.action }}" == 'published' ]; then
           echo release=true >> $GITHUB_OUTPUT
           SYNAPSE_VERSION=$(jq -r '.release.tag_name' "$GITHUB_EVENT_PATH")
         else
