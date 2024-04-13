@@ -51,7 +51,7 @@ jobs:
           .git/modules
         key: ${{ runner.os }}-${{matrix.arch}}-submodules-${{ steps.submodules.outputs.hash }}
   
-    - name: prep variables
+    - name: Prepare variables
       id: vars
       shell: bash
       run: |
@@ -65,18 +65,13 @@ jobs:
           echo os=Windows_NT >> $GITHUB_OUTPUT
         fi
     
-    - name: Debug
-      if: runner.os == 'Windows'
-      run: |
-        echo "C:\mingw64\libexec\gcc\x86_64-w64-mingw32\12.2.0" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
     - name: Install dependencies
       run: |
         make -j2 NIMFLAGS="--parallelBuild:2 -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}}" V=1 update
     
     - name: Build project
       run: |
-        make -j2 NIMFLAGS="--parallelBuild:2 -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
+        make -j2 NIMFLAGS="--parallelBuild:2 -d:disableMarchNative --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
         tar -cvzf ${{steps.vars.outputs.synapse}} ./build/
   
     - name: Upload asset
