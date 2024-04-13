@@ -55,7 +55,7 @@ jobs:
       id: vars
       shell: bash
       run: |
-        if [ "${{ github.event_name }} == 'release' ] && [ "${{ github.event.action }}" == 'published' ]; then
+        if [ "${{ github.event_name }}" == 'release' ] && [ "${{ github.event.action }}" == 'published' ]; then
           SYNAPSE_VERSION=${GITHUB_REF#refs/*/}
         else
           SYNAPSE_VERSION=dev
