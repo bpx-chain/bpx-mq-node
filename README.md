@@ -4,7 +4,7 @@
 
 Official Nim implementation of the Synapse network node.
 
-Synapse is a real time off-chain communication layer for BPX DApps.
+Synapse is a real time off-chain communication layer for BPX chain DApps.
 
 ## Building the source
 
