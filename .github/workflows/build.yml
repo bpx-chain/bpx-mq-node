@@ -49,7 +49,7 @@ jobs:
         path: |
           vendor/
           .git/modules
-        key: ${{ runner.os }}-${{matrix.arch}}-submodules-${{ steps.submodules.outputs.hash }}
+        key: ${{ matrix.os }}-${{matrix.arch}}-submodules-${{ steps.submodules.outputs.hash }}
   
     - name: Prepare variables
       id: vars
