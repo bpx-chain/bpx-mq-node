@@ -328,7 +328,7 @@ type
 
       filter* {.
         desc: "Enable filter protocol: true|false",
-        defaultValue: false
+        defaultValue: true
         name: "filter" }: bool
 
       filternode* {.
@@ -360,7 +360,7 @@ type
 
       lightpush* {.
         desc: "Enable lightpush protocol: true|false",
-        defaultValue: false
+        defaultValue: true
         name: "lightpush" }: bool
 
       lightpushnode* {.
