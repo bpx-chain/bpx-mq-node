@@ -301,7 +301,7 @@ type
 
       storeMessageRetentionPolicy* {.
         desc: "Message store retention policy. Time retention policy: 'time:<seconds>'. Capacity retention policy: 'capacity:<count>'. Size retention policy: 'size:<xMB/xGB>'. Set to 'none' to disable.",
-        defaultValue: "time:" & $2.days.seconds,
+        defaultValue: "size:5GB",
         name: "store-message-retention-policy" }: string
 
       storeMessageDbUrl* {.
