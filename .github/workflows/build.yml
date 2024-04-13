@@ -80,7 +80,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        make -j2 NIMFLAGS="--parallelBuild:2 -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}} ${{steps.vars.outputs.nimflags}}" V=1 update
+        make -j2 NIMFLAGS="--parallelBuild:2 -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}}" V=1 update
     
     - name: Build project
       run: |
