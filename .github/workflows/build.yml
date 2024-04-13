@@ -91,7 +91,7 @@ jobs:
         if-no-files-found: error
     
     - name: Upload release artifacts
-      if: steps.vars.release == 'true'
+      if: steps.vars.outputs.release == 'true'
       shell: bash
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
