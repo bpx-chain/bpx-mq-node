@@ -68,6 +68,7 @@ jobs:
     - name: Debug
       run: |
         echo "C:\mingw64\libexec\gcc\x86_64-w64-mingw32\12.2.0" >> $GITHUB_PATH
+        dir C:\mingw64\libexec\gcc\x86_64-w64-mingw32\12.2.0
 
     - name: Install dependencies
       run: |
