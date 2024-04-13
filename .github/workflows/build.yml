@@ -23,7 +23,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-2019]
+        os: [ubuntu-latest, macos-latest]
         arch: [amd64]
         include:
         - os: macos-latest
@@ -55,7 +55,12 @@ jobs:
       id: vars
       shell: bash
       run: |
-        echo "synapse=synapse-${{matrix.arch}}-${{runner.os}}.tar.gz" | tr "[:upper:]" "[:lower:]" >> $GITHUB_OUTPUT
+        if [[ "$env.RELEASE" == "true" ]]; then
+          SYNAPSE_VERSION=$env:RELEASE_TAG
+        else
+          SYNAPSE_VERSION=dev
+        fi                
+        echo "tgz=synapse-$SYNAPSE_VERSION-${{runner.os}}-${{matrix.arch}}.tar.gz" | tr "[:upper:]" "[:lower:]" >> $GITHUB_OUTPUT
         
         if [[ "${{runner.os}}" == "macOS" ]]; then
           echo os=macosx >> $GITHUB_OUTPUT
@@ -72,18 +77,20 @@ jobs:
     - name: Build project
       run: |
         make -j2 NIMFLAGS="--parallelBuild:2 -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
-        tar -cvzf ${{steps.vars.outputs.synapse}} ./build/
+        mv build synapse        
+        tar zcvf ${{steps.vars.outputs.tgz}} ./synapse
   
     - name: Upload asset
       uses: actions/upload-artifact@v2.2.3
       with:
-        name: ${{steps.vars.outputs.synapse}}
-        path: ${{steps.vars.outputs.synapse}}
+        name: ${{steps.vars.outputs.tgz}}
+        path: ${{steps.vars.outputs.tgz}}
         if-no-files-found: error
     
     - name: Upload release artifacts
       if: env.RELEASE == 'true'
+      shell: bash
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        gh release upload $env:RELEASE_TAG ./build/synapse*
+        gh release upload $env:RELEASE_TAG ${{steps.vars.outputs.tgz}}
