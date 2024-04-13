@@ -68,10 +68,10 @@ jobs:
     - name: Debug
       run: |
         echo "C:\mingw64\libexec\gcc\x86_64-w64-mingw32\12.2.0" >> $GITHUB_PATH
-        cc1
 
     - name: Install dependencies
       run: |
+        cc1 -v
         make -j2 NIMFLAGS="--parallelBuild:2 -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}}" V=1 update
     
     - name: Build project
