@@ -6,6 +6,15 @@ Official Nim implementation of the Synapse network node.
 
 Synapse is a real time off-chain communication layer for BPX chain DApps.
 
+## Binary releases
+
+The Linux binary release supports Ubuntu 20.04 or later and Debian 11 or later.
+Please install required dependency before starting Synapse node:
+
+```bash
+sudo apt-get install libpq5
+```
+
 ## Building the source
 
 Make sure you have the standard developer tools installed, including a C compiler, GNU Make, Bash, and Git.
