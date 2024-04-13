@@ -53,7 +53,7 @@ declarePublicHistogram waku_histogram_message_size, "message size histogram in k
   buckets = [0.0, 5.0, 15.0, 50.0, 100.0, 300.0, 700.0, 1000.0, Inf]
 
 declarePublicGauge waku_version, "Synapse version info (in git describe format)", ["version"]
-declarePublicGauge waku_node_errors, "number of wakunode errors", ["type"]
+declarePublicGauge waku_node_errors, "number of synapse node errors", ["type"]
 declarePublicGauge waku_lightpush_peers, "number of lightpush peers"
 declarePublicGauge waku_filter_peers, "number of filter peers"
 declarePublicGauge waku_store_peers, "number of store peers"

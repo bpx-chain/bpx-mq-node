@@ -21,7 +21,7 @@ import
   ./app
 
 logScope:
-  topics = "wakunode main"
+  topics = "synapse main"
 
 proc logConfig(conf: WakuNodeConf) =
   info "Configuration: Enabled protocols",
