@@ -42,7 +42,7 @@ Then provide it each time you run the node:
 ./synapse --nodekey=6b07cb57dfa4cf2d93f5a659ab953f7f9519255adaabf9535c1256deb1b26c5d
 ```
 
-To make it node discovery easier, specify your own public IP in an additional parameter:
+To help node discovery, you can specify your own public IP address in an additional parameter:
 ```bash
 ./synapse --listen-address=11.22.33.44
 ```
