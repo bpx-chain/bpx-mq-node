@@ -28,9 +28,9 @@ jobs:
       matrix:
         os: [windows-latest]
         arch: [amd64]
-        include:
-        - os: macos-latest
-          arch: arm64
+        #include:
+        #- os: macos-latest
+        #  arch: arm64
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
 
