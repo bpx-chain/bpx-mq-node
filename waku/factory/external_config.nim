@@ -451,7 +451,7 @@ type
 
       discv5Discovery* {.
         desc: "Enable discovering nodes via Node Discovery v5"
-        defaultValue: false
+        defaultValue: true
         name: "discv5-discovery" }: bool
 
       discv5UdpPort* {.
