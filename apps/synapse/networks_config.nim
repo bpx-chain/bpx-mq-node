@@ -38,5 +38,6 @@ proc TheWakuNetworkConf*(T: type ClusterConf): ClusterConf =
     discv5Discovery: true,
     discv5BootstrapNodes:
       @[
+        "enr:-MG4QD-y_9EVpWtUjp-kqRhBd9uUfl5GILlJl37QDQOT02ikA2NSrEDqwBe1_LT2KYSEzpFIo-X5Auqd129pgqJKC8sBgmlkgnY0gmlwhFBVndKKbXVsdGlhZGRyc4wACgRQVZ3SBh9A3gOCcnOTARcIAAAAAQACAAMABAAFAAYAB4lzZWNwMjU2azGhAo9__eQXswEzGbIOiP0VeJHSlAaXf4jN4Z4_z9TWgiOqg3RjcILqYIN1ZHCCIyiFd2FrdTIP"
       ],
   )
