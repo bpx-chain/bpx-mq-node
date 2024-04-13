@@ -55,11 +55,14 @@ jobs:
       id: vars
       shell: bash
       run: |
-        if [[ "$env.RELEASE" == "true" ]]; then
-          SYNAPSE_VERSION=$env:RELEASE_TAG
+        if [ "$GITHUB_EVENT_NAME" == 'release' ] && [ "$GH_EVENT_ACTION" == 'published' ]; then
+          echo release=true >> $GITHUB_OUTPUT
+          SYNAPSE_VERSION=$(jq -r '.release.tag_name' "$GITHUB_EVENT_PATH")
         else
+          echo release=false >> $GITHUB_OUTPUT
           SYNAPSE_VERSION=dev
-        fi                
+        fi
+        echo version=$SYNAPSE_VERSION >> $GITHUB_OUTPUT
         echo "tgz=synapse-$SYNAPSE_VERSION-${{runner.os}}-${{matrix.arch}}.tar.gz" | tr "[:upper:]" "[:lower:]" >> $GITHUB_OUTPUT
         
         if [[ "${{runner.os}}" == "macOS" ]]; then
@@ -88,9 +91,9 @@ jobs:
         if-no-files-found: error
     
     - name: Upload release artifacts
-      if: env.RELEASE == 'true'
+      if: steps.vars.release == 'true'
       shell: bash
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        gh release upload $env:RELEASE_TAG ${{steps.vars.outputs.tgz}}
+        gh release upload ${{steps.vars.outputs.version}} ${{steps.vars.outputs.tgz}}
