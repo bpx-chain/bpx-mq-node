@@ -64,6 +64,11 @@ jobs:
         else
           echo os=Windows_NT >> $GITHUB_OUTPUT
         fi
+    
+    - name: Debug
+      run: |
+        gcc
+        cc1
 
     - name: Install dependencies
       run: |
