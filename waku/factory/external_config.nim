@@ -132,7 +132,7 @@ type
         name: "cluster-id" }: uint32
 
       agentString* {.
-        defaultValue: "nwaku",
+        defaultValue: "synapse",
         desc: "Node agent string which is used as identifier in network"
         name: "agent-string" .}: string
 
@@ -291,7 +291,7 @@ type
 
       store* {.
         desc: "Enable/disable waku store protocol",
-        defaultValue: false,
+        defaultValue: true,
         name: "store" }: bool
 
       storenode* {.
