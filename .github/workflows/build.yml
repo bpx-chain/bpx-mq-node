@@ -67,7 +67,7 @@ jobs:
           echo nimflags="" >> $GITHUB_OUTPUT
         elif [[ "${{runner.os}}" == "Linux" ]]; then
           echo os=linux >> $GITHUB_OUTPUT
-          echo nimflags="--gcc.exe:musl-gcc --gcc.linkerexe:musl-gcc --passL:-static" >> $GITHUB_OUTPUT
+          echo nimflags="--gcc.exe:musl-gcc --gcc.linkerexe:musl-gcc --passL:-static --passL:-lc --passL:-Wl" >> $GITHUB_OUTPUT
         else
           echo os=Windows_NT >> $GITHUB_OUTPUT
           echo nimflags="" >> $GITHUB_OUTPUT
