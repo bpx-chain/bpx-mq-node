@@ -74,7 +74,7 @@ jobs:
         fi
     
     - name: Install musl
-      if: runner.os == "Linux"
+      if: runner.os == 'Linux'
       run: |
         apt-get -y install musl-tools
     
