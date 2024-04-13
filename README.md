@@ -33,30 +33,30 @@ Run a node with default options:
 ./synapse
 ```
 
-When a node private key is not set, the node will generate a new key every time it starts. Generate a permanent key with the command:
+When a node private key is not set, the node will generate a new key every time it starts. You can generate a permanent key with the command:
 ```bash
 openssl rand -hex 32
 ```
 Then provide it each time you run the node:
 ```bash
-./synapse --nodekey=6b07cb57dfa4cf2d93f5a659ab953f7f9519255adaabf9535c1256deb1b26c5d
+--nodekey=6b07cb57dfa4cf2d93f5a659ab953f7f9519255adaabf9535c1256deb1b26c5d
 ```
 
-To help node discovery, you can specify your own public IP address in an additional parameter:
+You can adjust how much disk space can be used to store messages waiting for offline users (5GB by default):
 ```bash
-./synapse --listen-address=11.22.33.44
+--store-message-retention-policy=size:20GB
 ```
 
-To allow browser-based DApps to connect to your node, enable the WebSocket server. First, assign a domain to your server and obtain an SSL certificate for it:
+To allow browser-based DApps to connect to your node, enable the WebSocket server. First, assign a domain to your server and obtain a SSL certificate for it:
 ```bash
 certbot certonly --standalone -d synapse.example.com
 ```
 Then run Synapse with additional arguments:
 ```bash
-./synapse --websocket-support=true --websocket-secure-support=true --websocket-secure-key-path=/etc/letsencrypt/live/synapse.example.com/privkey.pem --websocket-secure-cert-path=/etc/letsencrypt/live/synapse.example.com/fullchain.pem
+--websocket-support=true --websocket-secure-support=true --websocket-secure-key-path=/etc/letsencrypt/live/synapse.example.com/privkey.pem --websocket-secure-cert-path=/etc/letsencrypt/live/synapse.example.com/fullchain.pem
 ```
 
 The complete startup command for a production Synapse node might look like this:
 ```bash
-./synapse --nodekey=6b07cb57dfa4cf2d93f5a659ab953f7f9519255adaabf9535c1256deb1b26c5d --listen-address=11.22.33.44 --websocket-support=true --websocket-secure-support=true --websocket-secure-key-path=/etc/letsencrypt/live/synapse.example.com/privkey.pem --websocket-secure-cert-path=/etc/letsencrypt/live/synapse.example.com/fullchain.pem
+./synapse --nodekey=6b07cb57dfa4cf2d93f5a659ab953f7f9519255adaabf9535c1256deb1b26c5d --store-message-retention-policy=size:20GB --websocket-support=true --websocket-secure-support=true --websocket-secure-key-path=/etc/letsencrypt/live/synapse.example.com/privkey.pem --websocket-secure-cert-path=/etc/letsencrypt/live/synapse.example.com/fullchain.pem
 ```
