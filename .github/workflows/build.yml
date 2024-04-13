@@ -19,18 +19,15 @@ concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}-${{ github.event_name }}-${{ (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' || startsWith(github.ref, 'refs/heads/release/')) && github.sha || '' }}
   cancel-in-progress: true
 
-env:
-  NPROC: 2
-
 jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         arch: [amd64]
-        #include:
-        #- os: macos-latest
-        #  arch: arm64
+        include:
+        - os: macos-latest
+          arch: arm64
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
 
@@ -44,7 +41,7 @@ jobs:
       id: submodules
       shell: bash
       run: |
-        echo "hash=$(git submodule status | awk '{print $1}' | sort | shasum -a 256 | sed 's/[ -]*//g')" >> $GITHUB_OUTPUT
+        echo "hash=$(git submodule status | awk '{print $1}' | sort | sha256sum | sed 's/[ -]*//g')" >> $GITHUB_OUTPUT
   
     - name: Cache submodules
       uses: actions/cache@v3
@@ -58,22 +55,21 @@ jobs:
       id: vars
       shell: bash
       run: |
-        SYNAPSE_ARTIFACT_NAME=$(echo "synapse-${{matrix.arch}}-${{runner.os}}.tar.gz" | tr "[:upper:]" "[:lower:]")
+        echo "synapse=synapse-${{matrix.arch}}-${{runner.os}}.tar.gz" | tr "[:upper:]" "[:lower:]" >> $GITHUB_OUTPUT
+        
         if [[ "${{runner.os}}" == "macOS" ]]; then
-          OS=macosx
+          echo os=macosx >> $GITHUB_OUTPUT
         elif [[ "${{runner.os}}" == "Linux" ]]; then
-          OS=linux
+          echo os=linux >> $GITHUB_OUTPUT
         else
-          OS=Windows_NT
+          echo os=Windows_NT >> $GITHUB_OUTPUT
         fi
-  
-        echo "synapse=${SYNAPSE_ARTIFACT_NAME}" >> $GITHUB_OUTPUT
-        echo "os=${OS}" >> $GITHUB_OUTPUT
 
     - name: Install dependencies
-      shell: cmd
       run: |
         make -j2 NIMFLAGS="--parallelBuild:2 -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}}" V=1 update
+    
+    - name: Build project
         make -j2 NIMFLAGS="--parallelBuild:2 -d:disableMarchNative --os:${{steps.vars.outputs.os}} --cpu:${{matrix.arch}} -d:postgres" CI=false synapse
         tar -cvzf ${{steps.vars.outputs.synapse}} ./build/
   
@@ -88,6 +84,5 @@ jobs:
       if: env.RELEASE == 'true'
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BPX_INSTALLER_VERSION: ${{ steps.version_number.outputs.BPX_INSTALLER_VERSION }}
       run: |
-        gh release upload $env:RELEASE_TAG ${{steps.vars.outputs.bpxmq}}
+        gh release upload $env:RELEASE_TAG ./build/synapse*
