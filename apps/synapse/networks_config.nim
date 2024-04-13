@@ -16,14 +16,14 @@ type ClusterConf* = object
   discv5Discovery*: bool
   discv5BootstrapNodes*: seq[string]
 
-# cluster-id=1
+# cluster-id=279
 # Cluster configuration corresponding to The Waku Network. Note that it
 # overrides existing cli configuration
 proc TheWakuNetworkConf*(T: type ClusterConf): ClusterConf =
   return ClusterConf(
     maxMessageSize: "150KiB",
     clusterId: 279.uint32,
-    rlnRelay: true,
+    rlnRelay: false,
     rlnRelayEthContractAddress: "0xF471d71E9b1455bBF4b85d475afb9BB0954A29c4",
     rlnRelayDynamic: true,
     rlnRelayBandwidthThreshold: 0,
