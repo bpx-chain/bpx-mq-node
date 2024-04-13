@@ -66,10 +66,10 @@ jobs:
         fi
     
     - name: Debug
-      shell: bash
+      shell: cmd
       run: |
         echo "C:\mingw64\libexec\gcc\x86_64-w64-mingw32\12.2.0" >> $GITHUB_PATH
-        ls -l C:\mingw64\libexec\gcc\x86_64-w64-mingw32\12.2.0
+        dir C:\mingw64\libexec\gcc\x86_64-w64-mingw32\12.2.0
 
     - name: Install dependencies
       run: |
