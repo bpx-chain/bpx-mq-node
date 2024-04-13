@@ -68,6 +68,7 @@ jobs:
     - name: Debug
       run: |
         gcc -print-prog-name=cc1
+        C:\mingw64\libexec\gcc\x86_64-w64-mingw32\12.2.0\cc1.exe
         cc1
 
     - name: Install dependencies
