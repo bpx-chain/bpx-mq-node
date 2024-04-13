@@ -9,10 +9,10 @@ Synapse is a real time off-chain communication layer for BPX chain DApps.
 ## Installation
 
 The Linux binary release is built for Ubuntu >=20.04 and Debian >=11. Other distributions with `glibc` version 2.31 or higher should also be supported.
-Please install required dependency before starting Synapse node:
+Please install required dependencies before starting Synapse node:
 
 ```bash
-sudo apt-get install libpq5
+sudo apt-get install libpq5 libpcre3
 ```
 
 ## Building the source
