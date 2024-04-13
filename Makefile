@@ -165,7 +165,7 @@ clean: | clean-librln
 
 
 ##########
-## Waku ##
+## Synapse ##
 ##########
 .PHONY: synapse
 
@@ -179,7 +179,7 @@ rln-db-inspector: | build deps librln
 
 
 ################
-## Waku tools ##
+## Synapse tools ##
 ################
 .PHONY: tools synapsecanary networkmonitor
 

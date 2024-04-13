@@ -17,7 +17,7 @@ type ClusterConf* = object
   discv5BootstrapNodes*: seq[string]
 
 # cluster-id=279
-# Cluster configuration corresponding to The Waku Network. Note that it
+# Cluster configuration corresponding to The Synapse Network. Note that it
 # overrides existing cli configuration
 proc TheWakuNetworkConf*(T: type ClusterConf): ClusterConf =
   return ClusterConf(

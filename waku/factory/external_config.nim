@@ -290,7 +290,7 @@ type
       ## Store and message store config
 
       store* {.
-        desc: "Enable/disable waku store protocol",
+        desc: "Enable/disable synapse store protocol",
         defaultValue: true,
         name: "store" }: bool
 
@@ -371,7 +371,7 @@ type
       ## REST HTTP config
 
       rest* {.
-        desc: "Enable Waku REST HTTP server: true|false",
+        desc: "Enable Synapse REST HTTP server: true|false",
         defaultValue: false
         name: "rest" }: bool
 
@@ -488,9 +488,9 @@ type
         defaultValue: 1
         name: "discv5-bits-per-hop" .}: int
 
-      ## waku peer exchange config
+      ## synapse peer exchange config
       peerExchange* {.
-        desc: "Enable waku peer exchange protocol (responder side): true|false",
+        desc: "Enable synapse peer exchange protocol (responder side): true|false",
         defaultValue: false
         name: "peer-exchange" }: bool
 

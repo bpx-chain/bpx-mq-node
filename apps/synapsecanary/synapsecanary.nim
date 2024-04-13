@@ -56,7 +56,7 @@ type
       abbr: "l".}: LogLevel
 
     nodePort* {.
-      desc: "Listening port for waku node",
+      desc: "Listening port for synapse node",
       defaultValue: 60000,
       name: "node-port",
       abbr: "np".}: uint16

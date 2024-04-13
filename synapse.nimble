@@ -19,7 +19,7 @@ requires "nim >= 1.6.0",
   "stew",
   "stint",
   "metrics",
-  "libp2p", # Only for Waku v2
+  "libp2p", # Only for Synapse v2
   "web3",
   "presto",
   "regex"
@@ -46,7 +46,7 @@ proc buildLibrary(name: string, srcDir = "./", params = "", `type` = "static") =
   else:
     exec "nim c" & " --out:build/" & name & ".so --threads:on --app:lib --opt:size --noMain --header " & extra_params & " " & srcDir & name & ".nim"
 
-### Waku tasks
+### Synapse tasks
 task synapse, "Build Synapse cli node":
   let name = "synapse"
   buildBinary name, "apps/synapse/"
@@ -64,10 +64,10 @@ task rln_db_inspector, "Build the rln db inspector":
   buildBinary name, "tools/rln_db_inspector/"
 
 ### C Bindings
-task libwakuStatic, "Build the cbindings waku node library":
+task libwakuStatic, "Build the cbindings synapse node library":
   let name = "libwaku"
   buildLibrary name, "library/", "-d:chronicles_log_level=ERROR", "static"
 
-task libwakuDynamic, "Build the cbindings waku node library":
+task libwakuDynamic, "Build the cbindings synapse node library":
   let name = "libwaku"
   buildLibrary name, "library/", "-d:chronicles_log_level=ERROR", "dynamic"

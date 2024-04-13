@@ -196,7 +196,7 @@ proc setupDiscoveryV5*(app: App): WakuDiscoveryV5 =
   )
 
 proc setupWakuApp*(app: var App): AppResult[void] =
-  ## Waku node
+  ## Synapse node
   let initNodeRes = initNode(app.conf, app.netConf, app.rng, app.key, app.record, app.peerStore, app.dynamicBootstrapNodes)
   if initNodeRes.isErr():
     return err("failed to init node: " & initNodeRes.error)
@@ -303,10 +303,10 @@ proc startApp*(app: var App): AppResult[void] =
     let wakuDiscv5 = app.wakuDiscv5.get()
     let catchRes = catch: (waitFor wakuDiscv5.start())
     let startRes = catchRes.valueOr:
-      return err("failed to start waku discovery v5: " & catchRes.error.msg)
+      return err("failed to start synapse discovery v5: " & catchRes.error.msg)
 
     startRes.isOkOr:
-      return err("failed to start waku discovery v5: " & error)
+      return err("failed to start synapse discovery v5: " & error)
 
   return ok()
 

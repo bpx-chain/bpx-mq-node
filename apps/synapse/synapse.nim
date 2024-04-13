@@ -90,7 +90,7 @@ when isMainModule:
   of inspectRlnDb:
     doInspectRlnDb(conf)
   of noCommand:
-    # The Waku Network config (cluster-id=1)
+    # The Synapse Network config (cluster-id=1)
     if conf.clusterId == 279:
       let twnClusterConf = ClusterConf.TheWakuNetworkConf()
       if len(conf.shards) != 0:
@@ -113,7 +113,7 @@ when isMainModule:
 
     var wakunode2 = App.init(rng, conf)
 
-    info "Running nwaku node", version = app.git_version
+    info "Running synapse node", version = app.git_version
     logConfig(conf)
 
 
