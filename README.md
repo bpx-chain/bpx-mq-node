@@ -53,7 +53,7 @@ certbot certonly --standalone -d synapse.example.com
 ```
 Then run Synapse with additional arguments:
 ```bash
---websocket-support=true --websocket-secure-support=true --websocket-secure-key-path=/etc/letsencrypt/live/synapse.example.com/privkey.pem --websocket-secure-cert-path=/etc/letsencrypt/live/synapse.example.com/fullchain.pem
+./synapse --websocket-support=true --websocket-secure-support=true --websocket-secure-key-path=/etc/letsencrypt/live/synapse.example.com/privkey.pem --websocket-secure-cert-path=/etc/letsencrypt/live/synapse.example.com/fullchain.pem
 ```
 
 The complete startup command for a production Synapse node might look like this:
