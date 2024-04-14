@@ -38,6 +38,6 @@ proc TheWakuNetworkConf*(T: type ClusterConf): ClusterConf =
     discv5Discovery: true,
     discv5BootstrapNodes:
       @[
-        "enr:-MG4QD-y_9EVpWtUjp-kqRhBd9uUfl5GILlJl37QDQOT02ikA2NSrEDqwBe1_LT2KYSEzpFIo-X5Auqd129pgqJKC8sBgmlkgnY0gmlwhFBVndKKbXVsdGlhZGRyc4wACgRQVZ3SBh9A3gOCcnOTARcIAAAAAQACAAMABAAFAAYAB4lzZWNwMjU2azGhAo9__eQXswEzGbIOiP0VeJHSlAaXf4jN4Z4_z9TWgiOqg3RjcILqYIN1ZHCCIyiFd2FrdTIP"
+        "enr:-P64QJTwh0qqUM1vOwfROqwGQ8T6ukEa5rUdHdYDMFIKAJgYMsHiVMd4RNFXi0XHc5ehk8CUcXPVCQmxTc5Lhexwa1MBgmlkgnY0gmlwhFBVndKKbXVsdGlhZGRyc7hIACE2HHN5bmFwc2UxLm1haW5uZXQuYnB4Y2hhaW4uY2MG6mAAIzYcc3luYXBzZTEubWFpbm5ldC5icHhjaGFpbi5jYwYfQN4DgnJzkwEXCAAAAAEAAgADAAQABQAGAAeJc2VjcDI1NmsxoQKPf_3kF7MBMxmyDoj9FXiR0pQGl3-IzeGeP8_U1oIjqoN0Y3CC6mCDdWRwgiMohXdha3UyDw"
       ],
   )
